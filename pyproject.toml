@@ -2,13 +2,17 @@
 name = "gameofset"
 version = "0.1.0"
 description = "Rest API for the game of Set!"
-authors = ["Jose Andres Moya Porras <jose.91cr@gmail.com>"]
+authors = ["Jose Moya <jose.91cr@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.115.0"
+uvicorn = "^0.30.6"
 
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6.7"
 
 [build-system]
 requires = ["poetry-core"]
