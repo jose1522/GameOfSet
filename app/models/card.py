@@ -31,6 +31,15 @@ class Card(BaseModel):
             )
         return getattr(self, name)
 
+    def __hash__(self) -> int:
+        return hash((self.color, self.shape, self.number, self.shading))
+
+    def __repr__(self):
+        return f"Card({self.color}, {self.shape}, {self.number}, {self.shading})"
+
+    def __str__(self):
+        return self.__repr__()
+
 
 class CardSetRequest(BaseModel):
     cards: List[Card]

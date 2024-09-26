@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Set
 from models.card import Card
 
 
@@ -7,11 +7,10 @@ class SetFinderInterface(ABC):
     """Interface for finding sets in a deck of cards"""
 
     def __init__(self):
-        self.cards: List[Card] = []
+        self.cards: Set[Card] = set()
 
-    @abstractmethod
     def add_card(self, card: Card) -> None:
-        """Adds a card to the deck."""
+        self.cards.add(card)
 
     @abstractmethod
     def find_sets(self, set_size: int) -> List[List[Card]]:

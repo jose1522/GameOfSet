@@ -6,9 +6,6 @@ from models.card import Card, CardAttributeNames
 
 
 class SetFinder(SetFinderInterface):
-    def add_card(self, card: Card) -> None:
-        self.cards.append(card)
-
     @staticmethod
     def _attributes_match(attribute_values: List) -> bool:
         """Helper function. Checks if the attribute values are either all the same or all different."""
