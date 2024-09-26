@@ -1,5 +1,6 @@
 from fastapi import Depends, APIRouter
 
+from core.authentication import verify_basic_auth
 from core.set_finder import SetFinder
 from interfaces.set_finder import SetFinderInterface
 from models.card import CardSetResponse, CardSetRequest
@@ -16,6 +17,7 @@ def get_set_finder() -> SetFinderInterface:
 def find_sets(
     params: CardSetRequest,
     set_finder: SetFinderInterface = Depends(get_set_finder),
+    authenticated: bool = Depends(verify_basic_auth),
 ):
     for card in params.cards:
         set_finder.add_card(card)

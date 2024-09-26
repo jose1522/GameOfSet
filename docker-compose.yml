@@ -12,6 +12,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.game_of_set_api.rule=Host(`localhost`)"
       - "traefik.http.services.game_of_set_api.loadbalancer.server.port=8000"
+    secrets:
+      - api_username
+      - api_password
 
   traefik:
     image: traefik:v3.1
@@ -31,3 +34,9 @@ services:
 networks:
   api-network:
     driver: bridge
+
+secrets:
+  api_username:
+    file: secrets/api_username.txt
+  api_password:
+    file: secrets/api_password.txt
