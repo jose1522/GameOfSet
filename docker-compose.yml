@@ -1,0 +1,33 @@
+services:
+  app:
+    image: game_of_set_api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - api-network
+    deploy:
+      replicas: 2
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.game_of_set_api.rule=Host(`localhost`)"
+      - "traefik.http.services.game_of_set_api.loadbalancer.server.port=8000"
+
+  traefik:
+    image: traefik:v3.1
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"  #Traefik dashboard
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - api-network
+
+networks:
+  api-network:
+    driver: bridge
